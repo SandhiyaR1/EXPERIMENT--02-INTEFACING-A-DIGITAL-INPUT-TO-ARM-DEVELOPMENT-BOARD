@@ -1,6 +1,11 @@
-# EXPERIMENT--02-INTEFACING-A-DIGITAL-INPUT-TO-ARM-DEVELOPMENT-BOARD
-## Aim: To Interface a Digital Input  (userpush button  ) to ARM   development board and write a  program to obtain  the data and flash the led  
-## Components required: STM32 CUBE IDE, ARM IOT development board,  STM programmer tool.
+#### Developed by: SANDHIYA R
+#### Register number: 212222230129
+
+# EXPERIMENT- 02 INTEFACING A DIGITAl INPUT TO ARM DEVELOPMENT BOARD
+## Aim:
+To Interface a Digital Input  (userpush button  ) to ARM   development board and write a  program to obtain  the data and flash the led  
+## Components required:
+STM32 CUBE IDE, ARM IOT development board,  STM programmer tool.
 ## Theory 
 The full form of an ARM is an advanced reduced instruction set computer (RISC) machine, and it is a 32-bit processor architecture expanded by ARM holdings. The applications of an ARM processor include several microcontrollers as well as processors. The architecture of an ARM processor was licensed by many corporations for designing ARM processor-based SoC products and CPUs. This allows the corporations to manufacture their products using ARM architecture. Likewise, all main semiconductor companies will make ARM-based SOCs such as Samsung, Atmel, TI etc.
 
@@ -51,13 +56,46 @@ The full form of an ARM is an advanced reduced instruction set computer (RISC) m
 
 
 ## STM 32 CUBE PROGRAM :
+```
+#include "main.h"
+#include "stdbool.h"
+bool button_status;
+void push_button();
+int main(void)
+{
+  HAL_Init();
+  SystemClock_Config();
+  MX_GPIO_Init();
+  while (1)
+  {
+   push_button();
+  }
+}
+void push_button()
+{
+	 button_status=HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13);
+	 if(button_status==0)
+	 {
+    HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,SET);
+		  HAL_Delay(50);
+		  HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,RESET);
+		  HAL_Delay(50);
+	}
+	else
+	{
+		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,RESET);
+	}
+}
+```
 
 
 
 ## Output  :
- 
- 
- 
+ #### Light off                                          
+ ![image](https://github.com/SandhiyaR1/EXPERIMENT--02-INTEFACING-A-DIGITAL-INPUT-TO-ARM-DEVELOPMENT-BOARD/assets/113497571/731715de-81aa-4fd7-b002-06c32f44e7ea)  
+ #### Light on
+ ![image](https://github.com/SandhiyaR1/EXPERIMENT--02-INTEFACING-A-DIGITAL-INPUT-TO-ARM-DEVELOPMENT-BOARD/assets/113497571/094538fc-efda-4227-8b33-0e484aff5659)
+
  
 ## Result :
 Interfacing a digital Input (Pushbutton ) with ARM microcontroller based IOT development is executed and the results are verified.
